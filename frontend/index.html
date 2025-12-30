@@ -1,28 +1,29 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-  <title>PDF App Frontend</title>
-  <link rel="stylesheet" href="assets/style.css">
+  <meta charset="UTF-8" />
+  <title>Premium PDF Reader</title>
+  <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
 
-<h1>PDF Reader & Editor</h1>
+<div class="app-container">
+  <h1 class="title">📄 Premium PDF Reader</h1>
+  <p class="subtitle">Upload a PDF to extract and read text</p>
 
-<div class="card">
-  <h3>Read PDF Text</h3>
-  <input type="file" id="readFile">
-  <button onclick="readPdf()">Read Text</button>
-  <pre id="readOutput"></pre>
-</div>
+  <div class="card">
+    <label class="file-upload">
+      <input type="file" id="pdfFile" accept="application/pdf" />
+      <span>Click to Upload PDF</span>
+    </label>
 
-<div class="card">
-  <h3>Split PDF</h3>
-  <input type="file" id="splitFile">
-  <input type="number" id="start" placeholder="Start page">
-  <input type="number" id="end" placeholder="End page">
-  <button onclick="splitPdf()">Split</button>
-  <p id="splitMsg"></p>
+    <button class="btn-primary" onclick="readPdf()">Read PDF Text</button>
+
+    <div id="loader" class="loader hidden"></div>
+
+    <h3>Extracted Text</h3>
+    <pre id="output" class="output-box"></pre>
+  </div>
 </div>
 
 <script src="scripts.js"></script>
