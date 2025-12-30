@@ -1,4 +1,4 @@
-const API = "http://<REPLACE_BACKEND_LB>";   // your EKS backend
+const API = "http://aff6925ae64f741b99d5a820cdceb814-f051fef293cff9eb.elb.us-east-1.amazonaws.com";   // your EKS backend
 
 async function readPdf() {
     const fileInput = document.getElementById("pdfFile");
