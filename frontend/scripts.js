@@ -1,25 +1,32 @@
+const API = "http://<REPLACE_BACKEND_LB>";   // your EKS backend
 
-const API = "http://<REPLACE_BACKEND_LB>";
+async function readPdf() {
+    const fileInput = document.getElementById("pdfFile");
+    const loader = document.getElementById("loader");
+    const output = document.getElementById("output");
 
-function readPdf(){
-    let fileInput = document.getElementById("readFile");
-    let data = new FormData();
-    data.append("file", fileInput.files[0]);
+    if (!fileInput.files.length) {
+        alert("Please upload a PDF first");
+        return;
+    }
 
-    fetch(API + "/pdf/read-text", { method: "POST", body: data })
-    .then(r => r.json())
-    .then(d => document.getElementById("readOutput").innerText = d.text);
-}
+    loader.classList.remove("hidden");
+    output.innerText = "";
 
-function splitPdf(){
-    let fileInput = document.getElementById("splitFile");
-    let start = document.getElementById("start").value;
-    let end = document.getElementById("end").value;
+    let formData = new FormData();
+    formData.append("file", fileInput.files[0]);
 
-    let data = new FormData();
-    data.append("file", fileInput.files[0]);
+    try {
+        const res = await fetch(`${API}/pdf/read-text`, {
+            method: "POST",
+            body: formData
+        });
 
-    fetch(API + `/pdf/split?start=${start}&end=${end}`, { method: "POST", body: data })
-    .then(r => r.json())
-    .then(d => document.getElementById("splitMsg").innerText = d.message);
+        const data = await res.json();
+        output.innerText = data.text || "No text extracted";
+    } catch (e) {
+        output.innerText = "Error connecting to backend";
+    } finally {
+        loader.classList.add("hidden");
+    }
 }
