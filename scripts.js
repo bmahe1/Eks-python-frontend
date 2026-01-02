@@ -1,4 +1,4 @@
-const API = "http://aff6925ae64f741b99d5a820cdceb814-f051fef293cff9eb.elb.us-east-1.amazonaws.com";   // your EKS backend
+const API = "http://af64197d971da412daea313e31157e29-55cca34b5931a1e7.elb.us-east-1.amazonaws.com/";   // your EKS backend
 
 async function readPdf() {
     const fileInput = document.getElementById("pdfFile");
